@@ -348,12 +348,16 @@ function Nav() {
           <a href="#faq" className="hidden rounded-full px-4 py-2 text-[15px] font-bold text-ink-muted hover:text-ink md:block">
             FAQ
           </a>
-          <a
-            href={APP_STORE_URL || '#pricing'}
-            className="ml-2 rounded-full bg-accent px-4 py-2 text-[15px] font-extrabold text-on-accent transition-transform hover:scale-[1.03]"
-          >
-            Get Milo
-          </a>
+          {APP_STORE_URL ? (
+            <a
+              href={APP_STORE_URL}
+              className="ml-2 rounded-full bg-accent px-4 py-2 text-[15px] font-extrabold text-on-accent transition-transform hover:scale-[1.03]"
+            >
+              Get Milo
+            </a>
+          ) : (
+            <span className="ml-2 rounded-full bg-accent px-4 py-2 text-[15px] font-extrabold text-on-accent">Coming soon</span>
+          )}
         </div>
       </div>
     </nav>

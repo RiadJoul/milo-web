@@ -19,14 +19,28 @@ export function Logo({ size = 28 }: { size?: number }) {
   );
 }
 
-/** The main call to action. Points at the App Store once APP_STORE_URL is set. */
-export function GetMilo({ label = 'Get Milo on the App Store', className = '' }: { label?: string; className?: string }) {
+/**
+ * The main call to action: "Coming soon" until APP_STORE_URL is set, then a
+ * link to the App Store.
+ */
+export function GetMilo({ className = '' }: { className?: string }) {
+  if (!APP_STORE_URL) {
+    return (
+      <span
+        aria-disabled
+        className={`inline-flex h-13 items-center gap-2.5 rounded-full bg-accent px-7 text-[16px] font-extrabold text-on-accent ${className}`}
+      >
+        <span className="h-2 w-2 rounded-full bg-on-accent/60" />
+        Coming soon to the App Store
+      </span>
+    );
+  }
   return (
     <a
-      href={APP_STORE_URL || '#pricing'}
+      href={APP_STORE_URL}
       className={`group inline-flex h-13 items-center gap-2 rounded-full bg-accent px-7 text-[16px] font-extrabold text-on-accent transition-transform hover:scale-[1.03] active:scale-[0.98] ${className}`}
     >
-      {label}
+      Get Milo on the App Store
       <ArrowRight size={18} strokeWidth={2.6} className="transition-transform group-hover:translate-x-0.5" />
     </a>
   );
