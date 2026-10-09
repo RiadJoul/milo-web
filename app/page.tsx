@@ -4,7 +4,7 @@ import { HeroLesson } from '@/components/scenes/HeroLesson';
 import { AskScene, EquationScene, ExamScene } from '@/components/scenes/IPadScenes';
 import { Reveal } from '@/components/site/Reveal';
 import { Eyebrow, GetMilo, Headline, Logo } from '@/components/site/ui';
-import { APP_STORE_URL, PRICES, PRIVACY_URL, SUPPORT_EMAIL, TERMS_URL } from '@/lib/site';
+import { APP_STORE_URL, PRICES, PRIVACY_URL, SUPPORT_URL, TERMS_URL } from '@/lib/site';
 
 const TOPICS = [
   'The Moon Landing',
@@ -55,7 +55,7 @@ const FAQ = [
   },
   {
     q: 'How long is a lesson?',
-    a: 'As long as the topic needs. Milo plans the whole chapter first (between 3 and 12 ideas) and teaches it to the end, finishing with a mind map recap. You can stop, ask questions, or practise at any point.',
+    a: 'As long as the topic needs. Milo plans the whole chapter first (from 6 to 30 ideas) and teaches it to the end, finishing with a mind map recap. You can stop, ask questions, or practise at any point.',
   },
   {
     q: 'Which devices does it run on?',
@@ -261,21 +261,24 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
           <Reveal className="text-center">
             <Eyebrow>Pricing</Eyebrow>
-            <Headline first="One plan." second="Two ways to pay." className="mt-3" />
+            <Headline first="One plan." second="Three ways to pay." className="mt-3" />
             <p className="mx-auto mt-5 max-w-lg text-[18px] leading-7 text-ink-muted">
               Milo Pro unlocks every lesson, exercise and exam prep session.
             </p>
           </Reveal>
-          <div className="mx-auto mt-12 grid max-w-3xl gap-4 md:grid-cols-2">
+          <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-3">
             <Reveal>
               <PriceCard name="Weekly" price={PRICES.weekly} period="per week" />
             </Reveal>
             <Reveal delay={100}>
+              <PriceCard name="Monthly" price={PRICES.monthly} period="per month" />
+            </Reveal>
+            <Reveal delay={200}>
               <PriceCard
                 name="Yearly"
                 price={PRICES.yearly}
                 period="per year"
-                note={`Just ${PRICES.yearlyPerWeek} a week`}
+                note={`Just ${PRICES.yearlyPerMonth} a month`}
                 badge={PRICES.yearlySaving}
                 featured
               />
@@ -395,7 +398,7 @@ function PriceCard({
       <p className="mt-2 text-[15px] font-semibold opacity-60">{period}</p>
       <p className="mt-1 min-h-6 text-[15px] font-bold">{note}</p>
       <ul className="mt-6 space-y-2.5 text-[15px] font-semibold">
-        {['7 new lessons every week', 'Full lessons on any topic', 'Lessons from your own notes and PDFs', 'Exercises and exam prep', 'Voice, subtitles, diagrams'].map(
+        {['Full lessons on any topic', 'Lessons from your own notes and PDFs', 'Exercises and exam prep', 'Voice, subtitles, diagrams'].map(
           (item) => (
             <li key={item} className="flex items-center gap-2.5">
               <Check size={16} strokeWidth={3} className="shrink-0 opacity-70" />
@@ -412,7 +415,7 @@ function Footer() {
   const links = [
     ['Privacy', PRIVACY_URL],
     ['Terms', TERMS_URL],
-    ['Support', SUPPORT_EMAIL && `mailto:${SUPPORT_EMAIL}`],
+    ['Support', SUPPORT_URL],
   ].filter(([, href]) => href);
   return (
     <footer className="border-t border-line">

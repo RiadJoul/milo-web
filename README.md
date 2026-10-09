@@ -15,6 +15,8 @@ npm run build   # production build (the page prerenders as static HTML)
   (`components/board/timeline.ts`), ported from the app's onboarding boards. Milo is iPad only, so every scene is the tutor screen on a landscape iPad
   (`IPadSession` in `components/board/devices.tsx`: side panel, board, tool rail, dock). They play only while on screen, and show
   the finished board when the visitor prefers reduced motion.
+- `/privacy`, `/terms` and `/support` are the app's legal and App Store support pages (the app's `lib/legal.ts` links
+  to them). Their text is in `lib/legal-text.ts`, copied from the app's `docs/legal-drafts.md`: change both together.
 - Links (App Store, privacy, terms, support) and prices live in `lib/site.ts`. Empty links are hidden, and the buttons say
   "Coming soon" until the App Store URL is set.
 - Board pictures in `public/images/` are public domain (Wikimedia Commons), like the app's onboarding images.
