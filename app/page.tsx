@@ -261,29 +261,14 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
           <Reveal className="text-center">
             <Eyebrow>Pricing</Eyebrow>
-            <Headline first="One plan." second="Three ways to pay." className="mt-3" />
+            <Headline first="One plan." second="Two ways to pay." className="mt-3" />
             <p className="mx-auto mt-5 max-w-lg text-[18px] leading-7 text-ink-muted">
               Milo Pro unlocks every lesson, exercise and exam prep session.
             </p>
           </Reveal>
-          <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-3">
-            <Reveal>
-              <PriceCard name="Weekly" price={PRICES.weekly} period="per week" />
-            </Reveal>
-            <Reveal delay={100}>
-              <PriceCard name="Monthly" price={PRICES.monthly} period="per month" />
-            </Reveal>
-            <Reveal delay={200}>
-              <PriceCard
-                name="Yearly"
-                price={PRICES.yearly}
-                period="per year"
-                note={`Just ${PRICES.yearlyPerMonth} a month`}
-                badge={PRICES.yearlySaving}
-                featured
-              />
-            </Reveal>
-          </div>
+          <Reveal className="mx-auto mt-12 max-w-4xl">
+            <ProCard />
+          </Reveal>
           <p className="mt-6 text-center text-[13px] text-ink-faint">
             Billed through the App Store. Cancel any time in your subscription settings.
           </p>
@@ -367,7 +352,38 @@ function Nav() {
   );
 }
 
-function PriceCard({
+const PRO_BENEFITS = [
+  'Full lessons on any topic',
+  'Lessons from your own notes and PDFs',
+  'Exercises and exam prep, marked step by step',
+  'Ask out loud, any time',
+  'Voice, subtitles, pictures and diagrams',
+];
+
+/** Milo Pro: what it includes once, beside its two prices (the same plan, paid monthly or yearly). */
+function ProCard() {
+  return (
+    <div className="grid gap-8 rounded-[30px] border border-line bg-surface p-7 sm:p-9 md:grid-cols-[1fr_1.1fr] md:items-center">
+      <div>
+        <p className="text-[15px] font-extrabold uppercase tracking-[1.4px] text-ink-faint">Milo Pro</p>
+        <ul className="mt-5 space-y-3 text-[16px] font-semibold text-ink">
+          {PRO_BENEFITS.map((item) => (
+            <li key={item} className="flex items-center gap-3">
+              <Check size={17} strokeWidth={3} className="shrink-0 text-ink-muted" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="grid gap-3">
+        <PriceOption name="Yearly" price={PRICES.yearly} period="per year" note={`Just ${PRICES.yearlyPerMonth} a month`} badge={PRICES.yearlySaving} featured />
+        <PriceOption name="Monthly" price={PRICES.monthly} period="per month" />
+      </div>
+    </div>
+  );
+}
+
+function PriceOption({
   name,
   price,
   period,
@@ -384,29 +400,19 @@ function PriceCard({
 }) {
   return (
     <div
-      className={`relative h-full rounded-[26px] p-7 ${
-        featured ? 'bg-accent text-on-accent' : 'border border-line bg-surface text-ink'
-      }`}
+      className={`relative rounded-[22px] px-6 py-5 ${featured ? 'bg-accent text-on-accent' : 'border border-line bg-subtle text-ink'}`}
     >
       {badge && (
-        <span className="absolute right-6 top-6 rounded-full bg-highlight px-3 py-1 text-[12px] font-extrabold text-on-highlight">
+        <span className="absolute right-5 top-5 rounded-full bg-highlight px-3 py-1 text-[12px] font-extrabold text-on-highlight">
           {badge}
         </span>
       )}
-      <p className="text-[15px] font-extrabold uppercase tracking-[1.4px] opacity-60">{name}</p>
-      <p className="mt-4 font-display text-[48px] font-extrabold leading-none tracking-[-0.02em]">{price}</p>
-      <p className="mt-2 text-[15px] font-semibold opacity-60">{period}</p>
-      <p className="mt-1 min-h-6 text-[15px] font-bold">{note}</p>
-      <ul className="mt-6 space-y-2.5 text-[15px] font-semibold">
-        {['Full lessons on any topic', 'Lessons from your own notes and PDFs', 'Exercises and exam prep', 'Voice, subtitles, diagrams'].map(
-          (item) => (
-            <li key={item} className="flex items-center gap-2.5">
-              <Check size={16} strokeWidth={3} className="shrink-0 opacity-70" />
-              {item}
-            </li>
-          )
-        )}
-      </ul>
+      <p className="text-[13px] font-extrabold uppercase tracking-[1.4px] opacity-60">{name}</p>
+      <p className="mt-2 flex items-baseline gap-2">
+        <span className="font-display text-[38px] font-extrabold leading-none tracking-[-0.02em]">{price}</span>
+        <span className="text-[15px] font-semibold opacity-60">{period}</span>
+      </p>
+      {note && <p className="mt-1.5 text-[15px] font-bold">{note}</p>}
     </div>
   );
 }

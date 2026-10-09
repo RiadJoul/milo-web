@@ -10,7 +10,6 @@ export const SUPPORT_URL = '/support';
 
 /** Prices as in the RevenueCat `default` offering (docs/subscriptions.md). */
 export const PRICES = {
-  weekly: '$4.99',
   monthly: '$14.99',
   yearly: '$99.99',
   yearlyPerMonth: '$8.33',
